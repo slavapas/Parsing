@@ -1,4 +1,12 @@
 <?php 
+    //connect DB credentials
+    define('DB_HOST', 'localhost');
+    define('DB_USER', 'root');
+    define('DB_PASSWORD', '');
+    define('DB_NAME', 'parsing_db');
+
+    
+    
     // lib forparsing
     require_once('simple_html_dom.php');
 
@@ -11,6 +19,7 @@
         $article = file_get_html($url);
         $h1 = $article -> find('h1',0)->innertext;  
         $content = $article -> find('.product_meta',0)->innertext;  
+       // $data = compact(h1,content);
         $data = array(
             'h1' => $h1,
             'content' => $content
@@ -36,6 +45,8 @@
         //get each article link
         foreach ( $html->find ('a.woocommerce-LoopProduct-link') as $link_to_product){
             echo $link_to_product->href . PHP_EOL;
+            
+                // test how the function getArticleData() works
             print_r(getArticleData($link_to_product->href));
         }
 
