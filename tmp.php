@@ -6,7 +6,17 @@
     $url = "http://www.eslceramics.co.uk/all-tiles/";
    // $url = "http://ananaska.com/category/category/novosti/";
 
-    
+    //define function to get elements from a page
+    function getArticleData($url){
+        $article = file_get_html($url);
+        $h1 = $article -> find('h1',0)->innertext;  
+        $content = $article -> find('.product_meta',0)->innertext;  
+        $data = array(
+            'h1' => $h1,
+            'content' => $content
+        ); 
+        return $data;
+    }
 
     // get the content from $html without html tags
     //print_r($html->plaintext);
@@ -26,6 +36,7 @@
         //get each article link
         foreach ( $html->find ('a.woocommerce-LoopProduct-link') as $link_to_product){
             echo $link_to_product->href . PHP_EOL;
+            print_r(getArticleData($link_to_product->href));
         }
 
          //apply RECURSIA = вызов функции в самой функции
