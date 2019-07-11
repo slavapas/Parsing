@@ -1,4 +1,5 @@
 <?php 
+
 class DB{
     protected $connection;
 
@@ -6,7 +7,7 @@ class DB{
         $this->connection = new mysqli($host, $user, $password, $db_name);
         $this->query('SET NAMES UTF8');
         
-        if( !$this->connection ) {
+        if( mysqli_connect_error() ){
             throw new Exception('Could not connect to DB ');
         }
     }
