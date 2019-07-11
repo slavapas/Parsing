@@ -2,17 +2,23 @@
     //connect DB credentials
     define('DB_HOST', 'localhost');
     define('DB_USER', 'root');
-    define('DB_PASSWORD', '');
+    define('DB_PASSWORD', 'root');
     define('DB_NAME', 'parsing_db');
 
     
     
     // lib forparsing
     require_once('simple_html_dom.php');
+    require_once('db.class.php');
 
     // URL for parsing
     $url = "http://www.eslceramics.co.uk/all-tiles/";
    // $url = "http://ananaska.com/category/category/novosti/";
+
+   $db=new DB(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+   print_r($db->query('show tables'));
+   exit;
+
 
     //define function to get elements from a page
     function getArticleData($url){
