@@ -43,6 +43,8 @@
     // get the specific element from $html without according to its html tags
    //foreach ( $html->find ('a.read-more-link') as $link_to_product){
     function getProducts($url){
+        global $db;
+        
         //выводим номер страниц где мы находимся
         echo PHP_EOL.$url.PHP_EOL.PHP_EOL;
 
@@ -51,19 +53,19 @@
        
         //get each article link
         foreach ( $html->find ('a.woocommerce-LoopProduct-link') as $link_to_product){
-            
+            //each articles link add to DB
             $atricles_url=$db->escape($link_to_product->href);
             //add to DB the url of pages from site
             $sql="
                 insert into atricles
-                set url=$atricles_url
+                set url='{$atricles_url}'
             ";
-
+            $db->query($sql);
 
             echo $link_to_product->href . PHP_EOL;
             
                 // test how the function getArticleData() works
-            print_r(getArticleData($link_to_product->href));
+            //print_r(getArticleData($link_to_product->href));
         }
 
          //apply RECURSIA = вызов функции в самой функции
