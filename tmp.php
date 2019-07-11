@@ -15,9 +15,10 @@
     $url = "http://www.eslceramics.co.uk/all-tiles/";
    // $url = "http://ananaska.com/category/category/novosti/";
 
+   // DB connection
    $db=new DB(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-   print_r($db->query('show tables'));
-   exit;
+    //    print_r($db->query('show tables'));
+    //    exit;
 
 
     //define function to get elements from a page
@@ -50,6 +51,15 @@
        
         //get each article link
         foreach ( $html->find ('a.woocommerce-LoopProduct-link') as $link_to_product){
+            
+            $atricles_url=$db->escape($link_to_product->href);
+            //add to DB the url of pages from site
+            $sql="
+                insert into atricles
+                set url=$atricles_url
+            ";
+
+
             echo $link_to_product->href . PHP_EOL;
             
                 // test how the function getArticleData() works
