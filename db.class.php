@@ -36,7 +36,7 @@ class DB{
         return $data;
     }
 
-    public function escape($str){
+    public function escape($str){ 
         return mysqli_escape_string($this->connection, $str);
     }
 
